@@ -23,32 +23,29 @@ db.connect((err) => {
     if (err) throw err
     console.log("connection success...")
 
-    const sql = "SELECT * FROM user"
-    db.query(sql, (err, result) => {
-        const users = JSON.parse(JSON.stringify(result))
-        console.log("hasil database -> ", users)
-
         //untuk get data
         app.get("/", (req, res) => {
-            res.render("index", {users: users, title: "Data Mahasiswa Kelas B"})
+            const sql = "SELECT * FROM user"
+            db.query(sql, (err, result) => {
+                const users = JSON.parse(JSON.stringify(result))
+                console.log("hasil database -> ", users)
+                res.render("index", {users: users, title: "Data Mahasiswa Kelas B"})
+            }) 
         })
 
-        //untuk insert data
         app.post("/tambah", (req, res) => {
-            const insertSql = 'INSERT INTO user (nama, nim) VALUES ('${req.body.nama}', '${req.body.nim}');'
+            const insertSql = "INSERT INTO user (nama, nim) VALUES ('${req.body.nama}', '${req.body.nim}');"
+            
+            console.log("hai gaes.")
             db.query(insertSql, (err, result) => {
                 if (err) throw err
                 res.redirect("/")
             })
-        })
-
-
     })
-
-    
 })
 
 
 app.listen(8000, () => {
     console.log("server ready...")
 })
+''
