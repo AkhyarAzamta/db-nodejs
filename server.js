@@ -34,7 +34,7 @@ db.connect((err) => {
         })
 
         app.post('/tambah', (req, res) => {
-        const insertSql = 'INSERT INTO user (nama, nim) VALUES ('${req.body.nama}', '${req.body.nim}')';
+        const insertSql = `INSERT INTO user (nama, nim) VALUES ('${req.body.nama}', '${req.body.nim}')`;
             
             console.log("hai gaes.")
             db.query(insertSql, (err, result) => {
