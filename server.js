@@ -33,6 +33,11 @@ db.connect((err) => {
             }) 
         })
 
+        app.get('/cari', (req, res) => {
+            res.sendFile('./views/cari.html', {root: __dirname});
+            console.log("connection...")
+        })
+
         app.post('/tambah', (req, res) => {
             const insertSql = `INSERT INTO user (nama, nim) VALUES ('${req.body.nama}
             ', '${req.body.nim}')`;
