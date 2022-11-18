@@ -34,17 +34,8 @@ db.connect((err) => {
         })
 
         app.post('/tambah', (req, res) => {
-            const sql = "SELECT * FROM user"
-            const { nama, nim } = req.body;
-        const insertSql = "INSERT INTO user (nama, nim) VALUES ('${nama}', '${nim}')";
-        db.query(sql, (err, rows, fields) => {
-            if (!err) {
-                res.send(rows);
-            } else {
-                console.log(err.message);
-                res.send(err);
-            }
-        })
+            const insertSql = `INSERT INTO user (nama, nim) VALUES ('${req.body.nama}
+            ', '${req.body.nim}')`;
             
             console.log("hai gaes.")
             db.query(insertSql, (err, result) => {
