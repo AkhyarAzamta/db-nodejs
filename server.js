@@ -5,7 +5,7 @@ const BodyParser = require("body-parser")
 
 const app = express(); //definisikan si express nya menjadi app karna awalnya sebuah function
 
-app.use(BodyParser.urlencoded({ extended: false})) //untuk menerima form input
+app.use(BodyParser.urlencoded({ extended: true})) //untuk menerima form input
 
 app.set("view engine", "ejs") //ejs sebagai template engine
 app.set("views", "views") //untuk memberitau direktori html nya ada difolder views
@@ -23,6 +23,11 @@ db.connect((err) => {
     if (err) throw err
     console.log("connection success...")
 
+    
+    //proses validasi ketika terjadi permintaan pencarian
+
+    
+
         //untuk get data
         app.get('/', (req, res) => {
             const sql = "SELECT * FROM user"
@@ -34,9 +39,11 @@ db.connect((err) => {
         })
 
         app.get('/cari', (req, res) => {
-            res.sendFile('./views/cari.html', {root: __dirname});
-            console.log("connection...")
-        })
+            db.query(sql, (err, result) => {
+            res.sendFile('./index.html', {root: __dirname});
+            res.render("index", {users: users, title: "Data Mahasiswa Kelas B"})
+            })
+        });
 
         app.post('/tambah', (req, res) => {
             const insertSql = `INSERT INTO user (nama, nim) VALUES ('${req.body.nama}
