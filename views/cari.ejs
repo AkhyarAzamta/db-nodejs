@@ -16,13 +16,11 @@
     <h1><%= title %></h1>
     <form action="/cari" method="get">
       <div class="mb-3">
-        <label for="nim" class="form-label">Cari Mahasiswa</label>
-        <input type="text" placeholder="Masukan Nama" name="cari" class="form-control">
+        <label for="nim" class="form-label">NIM</label>
+        <input type="text" placeholder="Masukan Nama" name="nim" class="form-control">
       </div>
-      <input type="submit" class="btn btn-primary" value="Cari" />
+      <input type="submit" class="btn btn-primary" value="Tambahkan" />
     </form>
-
-
     <table class="table">
       <thead>
         <tr>
@@ -33,7 +31,6 @@
       <tbody>
         <% for (let user of users) { %>
         <tr>
-          
           <th scope="row"><%= user.nama %></th>
           <th scope="row"><%= user.nim %></th>
         </tr>
